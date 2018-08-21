@@ -1,0 +1,28 @@
+.container {
+  border-radius: 5px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+#output {
+  display: none;
+}
+
+#price {
+  float: right;
+  font-size: 30px;
+  margin-top: 15px;
+}
+
+#title {
+
+}
+
+#time {
+  font-size: 20px;
+}
+
+#enjoy {
+  font-size: 40px;
+  font-family: cursive;
+}

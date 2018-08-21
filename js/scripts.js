@@ -28,26 +28,41 @@ function Movie(title, rep, times, shortName) {
 }
 
 Movie.prototype.timeFormat = function() {
-  var timeStrings = [];
+  var strings = [];
+  var timeString;
+  var timeString2;
   this.showtimes.forEach(function(showtime) {
-    var timeString = showtime.toString();
-    if (timeString.length === 3){
-      timeString = timeString[0] + ":" + timeString[1] + timeString[2];
-      timeStrings.push(timeString);
+    timeString = showtime.toString();
+
+    if (timeString.length === 3) {
+      timeString2 = timeString[0] + ":" + timeString[1] + timeString[2];
+      strings.push(timeString2);
+    } else {
+      timeString2 = timeString[0] + timeString[1] + ":" + timeString[2] + timeString[3];
     }
-    return timeStrings;
   })
+  return strings;
 }
 
-var mission = new Movie("Mission Improbable", false, [130, 300, 500, 730, 900], "mission");
-var sorry = new Movie("Sorry To Trouble You", false, [200, 330, 530, 800, 930], "sorry");
-var casa = new Movie("Casablanca", true, [100, 245, 445, 715, 915], "casa");
-var horiz = new Movie("Horizontigo", true, [100, 245, 430, 715, 900], "horiz");
+function timeFormat2 (time) {
+  var timeStr = time.toString();
+  var output;
+  if (timeStr.length === 3) {
+    output = timeStr[0] + ":" + timeStr[1] + timeStr[2];
+  } else {
+    output = timeStr[0] + timeStr[1] + ":" + timeStr[2] + timeStr[3];
+  }
+  return output;
+}
+
+
+var mission = new Movie("Mission Improbable (R)", false, [130, 300, 500, 730, 900], "mission");
+var sorry = new Movie("Sorry To Trouble You (R)", false, [200, 330, 530, 800, 930], "sorry");
+var casa = new Movie("Casablanca (PG)", true, [100, 245, 445, 715, 915], "casa");
+var horiz = new Movie("Horizontigo (PG)", true, [100, 245, 430, 715, 900], "horiz");
 
 var allMovies = [mission, sorry, casa, horiz];
 allMovies.forEach(function(movie) {})
-
-console.log(horiz.timeFormat());
 
 // User interface logic
 
@@ -70,14 +85,13 @@ $(document).ready(function() {
     event.preventDefault();
     userMovie = eval($("#title").val());
     $("select#showTimes").text("");
-
     for(var i=0; i < userMovie.showtimes.length; i++) {
       $("select#showTimes").append("<option id='" +
         userMovie.showtimes[i] +
         "' value='" +
         userMovie.showtimes[i] +
         "'>" +
-        userMovie.showtimes.timeFormat() +
+        userMovie.timeFormat()[i] +
         "</option>");
     };
   });
@@ -88,17 +102,20 @@ $(document).ready(function() {
     userShowTime = $("#showTimes").val();
     var userTicket = new MovieTicket(userMovie, userShowTime, userAge);
     var price = userTicket.price();
-    $("#output").html("<h2>" +
-    userMovie.title +
-    "</h2>" +
-    "<p>$" +
+    $("#output").show();
+    $("#output").html(
+    "<p id='price'>$" +
     userTicket.price() +
     ".00</p>" +
-    "<p>Playing at " +
-    userTicket.showtime +
+    "<h2 id='title'>" +
+    userMovie.title +
+    "</h2>" +
+    "<p id='time'>Playing at " +
+    timeFormat2(userShowTime) +
     "</p>" +
-    "<p>" +
+    "<p id='enjoy'>" +
     "Enjoy the show!" +
-    "</p>")
+    "</p>");
+
   });
 });

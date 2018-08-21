@@ -12,29 +12,35 @@
 </head>
 
 <body>
-  <form class="title-input">
-    <label for="title">Please select a movie: </label>
-    <select id="title">
-    </select>
-    <!-- <button type="button" id="title-submit">GO</button> -->
-
-    <label for="showTimes">Please select a time: </label>
-    <select id="showTimes">
-    </select>
-
-    <label for="age">Ticket Type: </label>
-    <select id="age">
-      <option value="general" autofocus>General Admission</option>
-      <option value="senior">Senior</option>
-      <option value="student">Student</option>
-      <option value="veteran">Veteran</option>
-    </select>
-    <button type="submit" id="submit-button">Submit</button>
-  </form>
-  <div id="output">
-
+  <div class="container bg-info">
+    <h1>Regal Cinema 83</h1>
+    <h3>Make Your Movie Selections Below</h3>
+    <form class="title-input">
+      <div class="">
+        <label for="title">Please select a movie: </label>
+        <select id="title">
+          <option value="Select Movie" selected="true" disabled="disabled">Select Movie:</option>
+        </select>
+      </div>
+      <div class="">
+        <label for="showTimes">Please select a time: </label>
+        <select id="showTimes">
+          <option selected="true" disabled="disabled">Select Time:</option>
+        </select>
+      </div>
+      <div class="">
+        <label for="age">Ticket Type: </label>
+        <select id="age">
+          <option value="general" autofocus>General Admission</option>
+          <option value="senior">Senior</option>
+          <option value="student">Student</option>
+          <option value="veteran">Veteran</option>
+        </select>
+      </div>
+      <button type="submit" id="submit-button">Submit</button>
+    </form>
   </div>
-
+    <div id="output" class="bg-danger container">
+    </div>
 </body>
-
 </html>
