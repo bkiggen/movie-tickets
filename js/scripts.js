@@ -1,11 +1,13 @@
 // Business logic
 
+//TICKET CONSTUCTOR
 function MovieTicket(movie, time, type) {
   this.movie = movie;
   this.showtime = time;
   this.ticketType = type;
 }
 
+//TICKET COST
 MovieTicket.prototype.price = function() {
   var price = 12;
   if (this.movie.reperatory === true) {
@@ -20,6 +22,7 @@ MovieTicket.prototype.price = function() {
   return price;
 }
 
+//MOVIE CONSTUCTOR
 function Movie(title, rep, times, shortName) {
   this.title = title;
   this.reperatory = rep;
@@ -27,6 +30,7 @@ function Movie(title, rep, times, shortName) {
   this.shortName = shortName;
 }
 
+//TIME FORMAT
 Movie.prototype.timeFormat = function() {
   var strings = [];
   var timeString;
@@ -37,29 +41,30 @@ Movie.prototype.timeFormat = function() {
     if (timeString.length === 3) {
       timeString2 = timeString[0] + ":" + timeString[1] + timeString[2];
       strings.push(timeString2);
-    } else {
+    } else if (timeString.length === 4){
       timeString2 = timeString[0] + timeString[1] + ":" + timeString[2] + timeString[3];
     }
   })
   return strings;
 }
 
+//TIME FORMAT 2
 function timeFormat2 (time) {
   var timeStr = time.toString();
   var output;
   if (timeStr.length === 3) {
     output = timeStr[0] + ":" + timeStr[1] + timeStr[2];
-  } else {
-    output = timeStr[0] + timeStr[1] + ":" + timeStr[2] + timeStr[3];
+  } else if (timeString.length === 4){
+    timeString2 = timeString[0] + timeString[1] + ":" + timeString[2] + timeString[3];
   }
   return output;
 }
 
 
-
+//MOVIE OBJECT CONSTRUCTORS
 var mission = new Movie("Mission Improbable (R)", false, [130, 300, 500, 730, 900], "mission");
 var sorry = new Movie("Sorry To Trouble You (R)", false, [200, 330, 530, 800, 930], "sorry");
-var casa = new Movie("Casablanca (PG)", true, [100, 245, 445, 715, 915], "casa");
+var casa = new Movie("Casanegra (PG)", true, [100, 245, 445, 715, 915], "casa");
 var horiz = new Movie("Horizontigo (PG)", true, [100, 245, 430, 715, 900], "horiz");
 
 var allMovies = [mission, sorry, casa, horiz];
@@ -67,12 +72,13 @@ allMovies.forEach(function(movie) {})
 
 // User interface logic
 
-
 $(document).ready(function() {
+//VARIABLES
   var userMovie;
   var userAge;
   var userShowTime;
 
+//RENEW LIST
 function renewList() {
   $("select#title").empty();
   allMovies.forEach(function(movie) {
@@ -85,10 +91,18 @@ function renewList() {
 }
 renewList();
 
-
+//POPULATE SHOWTIMES LIST
   $("form #title").focusout(function(event) {
     event.preventDefault();
-    userMovie = eval($("#title").val());
+    userMovieInput = $("#title").val();
+    console.log(userMovieInput);
+    userMovie = "";
+    allMovies.forEach(function(movie) {
+      if (movie.shortName === userMovieInput) {
+        userMovie = movie;
+      }
+    })
+    console.log(userMovie);
     $("select#showTimes").text("");
     for(var i=0; i < userMovie.showtimes.length; i++) {
       $("select#showTimes").append("<option id='" +
@@ -101,6 +115,7 @@ renewList();
     };
   });
 
+  //MAIN SUBMIT
   $("form.title-input").submit(function() {
     event.preventDefault();
     userAge = $("#age").val();
@@ -124,10 +139,12 @@ renewList();
 
   });
 
+  //TOGGLE OWNER SECTION
   $("#owner-button").click(function(){
     $(".theater-owner").toggle();
   });
 
+  //OWNER UNPUT
   $("form#get-movie-info").submit(function(event) {
     event.preventDefault();
 
@@ -140,10 +157,17 @@ renewList();
     }
     var inputtedShowtimes = $("#get-movie-showtimes").val();
     var showtimesArray = inputtedShowtimes.split(", ");
-
+    showtimesArray.map(function(time) {
+      var output = [];
+      output.push(parseInt(time));
+      return output;
+    })
     var inputtedMovie = new Movie(inputtedMovieTitle, inputtedReperatory, showtimesArray, inputtedShortName);
     allMovies.push(inputtedMovie);
     console.log(allMovies);
+    $("#get-movie-title").val("");
+    $("#get-movie-short-name").val("");
+    $("#get-movie-showtimes").val("");
     renewList();
   })
 });
