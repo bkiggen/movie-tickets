@@ -43,6 +43,7 @@ Movie.prototype.timeFormat = function() {
       strings.push(timeString2);
     } else if (timeString.length === 4){
       timeString2 = timeString[0] + timeString[1] + ":" + timeString[2] + timeString[3];
+      strings.push(timeString2);
     }
   })
   return strings;
@@ -54,8 +55,8 @@ function timeFormat2 (time) {
   var output;
   if (timeStr.length === 3) {
     output = timeStr[0] + ":" + timeStr[1] + timeStr[2];
-  } else if (timeString.length === 4){
-    timeString2 = timeString[0] + timeString[1] + ":" + timeString[2] + timeString[3];
+  } else if (timeStr.length === 4){
+    output = timeStr[0] + timeStr[1] + ":" + timeStr[2] + timeStr[3];
   }
   return output;
 }
