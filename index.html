@@ -13,22 +13,22 @@
 
 <body>
   <div class="container bg-info">
-    <h1>Regal Cinema 83</h1>
+    <img src="http://images.atomtickets.com/image/upload/v1493256022/website/regal/logos/RegalColorBlack.png">
     <h3>Make Your Movie Selections Below</h3>
     <form class="title-input">
-      <div class="">
+      <div class="form-group">
         <label for="title">Please select a movie: </label>
         <select id="title">
           <option value="Select Movie" selected="true" disabled="disabled">Select Movie:</option>
         </select>
       </div>
-      <div class="">
+      <div class="form-group">
         <label for="showTimes">Please select a time: </label>
         <select id="showTimes">
           <option selected="true" disabled="disabled">Select Time:</option>
         </select>
       </div>
-      <div class="">
+      <div class="form-group">
         <label for="age">Ticket Type: </label>
         <select id="age">
           <option value="general" autofocus>General Admission</option>
@@ -37,10 +37,32 @@
           <option value="veteran">Veteran</option>
         </select>
       </div>
-      <button type="submit" id="submit-button">Submit</button>
+      <button type="submit" id="submit-button" class="bg-warning">Submit</button>
     </form>
   </div>
     <div id="output" class="bg-danger container">
     </div>
+  <button type="button" id="owner-button">Theater Owners Click Here</button>
+  <footer class="theater-owner">
+    <h2>Create list of all movies and showtimes for today</h2>
+    <form id="get-movie-info">
+      <div class="form-group">
+        <label for="get-movie-short-name">Enter a one-word short name for the movie.</label>
+        <input type="text" id="get-movie-short-name">
+      </div>
+      <div class="form-group">
+        <label for="get-movie-title">Enter the full movie title</label>
+        <input type="text" id="get-movie-title">
+      </div>
+      <div class="form-group">
+        <input type="checkbox" name="get-movie-rep" value="old">Is this movie a reperatory screening?</input>
+      </div>
+      <div class="form-group">
+        <label for="get-movie-showtimes">Enter all showtimes for this movie, separated by a comma.</label>
+        <input type="text" id="get-movie-showtimes">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </footer>
 </body>
 </html>

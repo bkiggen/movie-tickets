@@ -56,6 +56,7 @@ function timeFormat2 (time) {
 }
 
 
+
 var mission = new Movie("Mission Improbable (R)", false, [130, 300, 500, 730, 900], "mission");
 var sorry = new Movie("Sorry To Trouble You (R)", false, [200, 330, 530, 800, 930], "sorry");
 var casa = new Movie("Casablanca (PG)", true, [100, 245, 445, 715, 915], "casa");
@@ -118,4 +119,26 @@ $(document).ready(function() {
     "</p>");
 
   });
+
+  $("#owner-button").click(function(){
+    $(".theater-owner").toggle();
+  });
+
+  $("form#get-movie-info").submit(function(event) {
+    event.preventDefault();
+
+    var inputtedMovieTitle = $("#get-movie-title").val();
+    var inputtedShortName = $("#get-movie-short-name").val();
+    var inputtedShowtimes = $("#get-movie-showtimes").val();
+    var inputtedReperatory = false;
+    if ($("input[name='get-movie-rep']:checked").val() === "old") {
+      inputtedReperatory = true;
+    }
+    var inputtedShowtimes = $("#get-movie-showtimes").val();
+    var showtimesArray = inputtedShowtimes.split(", ");
+
+    var inputtedMovie = new Movie(inputtedMovieTitle, inputtedReperatory, showtimesArray, inputtedShortName);
+    allMovies.push(inputtedMovie);
+    console.log(allMovies);
+  })
 });
