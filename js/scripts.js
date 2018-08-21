@@ -73,7 +73,8 @@ $(document).ready(function() {
   var userAge;
   var userShowTime;
 
-
+function renewList() {
+  $("select#title").empty();
   allMovies.forEach(function(movie) {
     $("select#title").append("<option value='" +
       movie.shortName +
@@ -81,6 +82,9 @@ $(document).ready(function() {
       movie.title +
       "</option>");
   });
+}
+renewList();
+
 
   $("form #title").focusout(function(event) {
     event.preventDefault();
@@ -140,5 +144,6 @@ $(document).ready(function() {
     var inputtedMovie = new Movie(inputtedMovieTitle, inputtedReperatory, showtimesArray, inputtedShortName);
     allMovies.push(inputtedMovie);
     console.log(allMovies);
+    renewList();
   })
 });
